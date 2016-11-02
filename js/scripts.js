@@ -41,8 +41,11 @@ $(document).ready(function(){
 
   $("#player1-roll").click(function(){
     roll = die1.roll();
+    $("#round-total").text(roundPoints);
+    $("#current-roll").text(roll);
     if(roll === 1) {
       roundPoints = 0;
+      $("#round-total").text(roundPoints);
       $("#player2-roll").prop("disabled", false);
       $("#player1-roll").prop("disabled", true);
       $("#player2-stop").prop("disabled", false);
@@ -51,6 +54,7 @@ $(document).ready(function(){
       roundPoints += roll;
     }
     console.log(roll);
+    $("#round-total").text(roundPoints);
   });
 
   $("#player1-stop").click(function(){
@@ -58,6 +62,7 @@ $(document).ready(function(){
     $("#player1-roll").prop("disabled", true);
     $("#player2-stop").prop("disabled", false);
     $("#player1-stop").prop("disabled", true);
+    $("#round-total").text(roundPoints);
     $("#player1").text(updateScore(player1, roundPoints));
     roundPoints = 0; //reset or value for new player//
   });
@@ -65,7 +70,10 @@ $(document).ready(function(){
 
   $("#player2-roll").click(function(){
     roll = die1.roll();
+    $("#round-total").text(roundPoints);
+    $("#current-roll").text(roll);
     if(roll === 1) {
+      $("#round-total").text(roundPoints);
       roundPoints = 0;
       $("#player1-roll").prop("disabled", false);
       $("#player2-roll").prop("disabled", true);
@@ -75,6 +83,7 @@ $(document).ready(function(){
       roundPoints += roll;
     }
     console.log(roll);
+    $("#round-total").text(roundPoints);
   });
 
   $("#player2-stop").click(function(){
@@ -82,7 +91,8 @@ $(document).ready(function(){
     $("#player2-roll").prop("disabled", true);
     $("#player1-stop").prop("disabled", false);
     $("#player2-stop").prop("disabled", true);
+    $("#round-total").text(roundPoints);
     $("#player2").text(updateScore(player2, roundPoints));
-     //reset or value for new player//
+    roundpoints = 0;
   });
 });
