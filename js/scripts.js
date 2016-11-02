@@ -1,5 +1,5 @@
 var roll = 0;
-var roundPoints = 0;
+var roundPoints = 0; //initialize//
 //business logic// Manipulate Data, action, not interacting with DOM
 
 function Die() {
@@ -15,7 +15,8 @@ function Player(){
 };
 
 function updateScore(player, points){
-  player.score = points;
+  player.score += points;
+  roundPoints = 0;
   // console.log(player.score);
   return player.score;
 };
@@ -42,20 +43,46 @@ $(document).ready(function(){
     roll = die1.roll();
     if(roll === 1) {
       roundPoints = 0;
-      console.log("Trying to Disable");
       $("#player2-roll").prop("disabled", false);
       $("#player1-roll").prop("disabled", true);
+      $("#player2-stop").prop("disabled", false);
+      $("#player1-stop").prop("disabled", true);
     } else {
       roundPoints += roll;
     }
     console.log(roll);
-    $("#player1").text(updateScore(player1, roundPoints));
   });
+
+  $("#player1-stop").click(function(){
+    $("#player2-roll").prop("disabled", false);
+    $("#player1-roll").prop("disabled", true);
+    $("#player2-stop").prop("disabled", false);
+    $("#player1-stop").prop("disabled", true);
+    $("#player1").text(updateScore(player1, roundPoints));
+    roundPoints = 0; //reset or value for new player//
+  });
+
 
   $("#player2-roll").click(function(){
     roll = die1.roll();
+    if(roll === 1) {
+      roundPoints = 0;
+      $("#player1-roll").prop("disabled", false);
+      $("#player2-roll").prop("disabled", true);
+      $("#player1-stop").prop("disabled", false);
+      $("#player2-stop").prop("disabled", true);
+    } else {
+      roundPoints += roll;
+    }
     console.log(roll);
-    $("#player2").text(updateScore(player2, score));
   });
 
+  $("#player2-stop").click(function(){
+    $("#player1-roll").prop("disabled", false);
+    $("#player2-roll").prop("disabled", true);
+    $("#player1-stop").prop("disabled", false);
+    $("#player2-stop").prop("disabled", true);
+    $("#player2").text(updateScore(player2, roundPoints));
+     //reset or value for new player//
+  });
 });
