@@ -9,34 +9,37 @@
   </head>
   <body>
     <div class="container">
-    <h1>Pig Dice Game</h1>
+      <div class="jumbotron">
+      <img src="img/pigleft.jpg" alt="piggies!" id="left" />
+      <h1>Pig Dice Game</h1>
+      <img src="img/pigRight.jpg" alt="piggies!" id="right"/>
+      </div>
       <div class="row">
         <div class="col-md-6">
-          <h2>Player 1:</h2>
+          <h2>Player 1</h2>
           <div class="well well-lg" id="player1">
             0
           </div>
-          <button class="btn btn-success btn-lg" id="player1-roll">Roll</button>
+          <button class="btn btn-info btn-lg" id="player1-roll">Roll</button>
           <button class="btn btn-danger btn-lg" id="player1-stop">Take Points</button>
         </div>
         <div class="col-md-6">
-          <h2>Player 2:</h2>
+          <h2>Player 2</h2>
           <div class="well well-lg" id="player2">
             0
           </div>
-          <button class="btn btn-success btn-lg" id="player2-roll" disabled>Roll</button>
+          <button class="btn btn-info btn-lg" id="player2-roll" disabled>Roll</button>
           <button class="btn btn-danger btn-lg" id="player2-stop" disabled>Take Points</button>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6" id="roundTotal-display">
           <h2>Round Total</h2>
           <div id="round-total">
           </div>
-
         </div>
-          <div class="col-md-6">
-            <h2>Current Roll:</h2>
+          <div class="col-md-6" id="currentRoll-display">
+            <h2>Current Roll</h2>
             <div id="current-roll">
             </div>
           </div>

@@ -1,13 +1,64 @@
-h1 {
-  font-size: 400%;
-  font-family: cursive;
+.jumbotron h1 {
+  font-size: 450%;
+  font-family: fantasy;
+  color: gold;
+  text-align: center;
+  display: inline-block;
+}
+
+.jumbotron {
+  overflow: hidden;
+  background-color: #800000;
 }
 
 h2 {
   font-size: 200%;
-  font-family: cursive;
+  font-family: fantasy;
+  color: gold;
 }
 
 #current-roll img {
   width: 35%;
+  margin-top: 3%;
+}
+
+#round-total {
+  font-size: 900%;
+}
+
+#player1 {
+  font-size: 400%;
+}
+
+#player2 {
+  font-size: 400%;
+}
+
+#roundTotal-display {
+  text-align: center;
+}
+
+#currentRoll-display {
+  text-align: center;
+}
+
+#left {
+  width: 25%;
+  margin: 0%;
+  padding: 0%;
+  display: inline-block;
+}
+
+#right {
+  width: 25%;
+  margin: 0%;
+  padding: 0%;
+  display: inline-block;
+}
+body {
+  background-color: #009900;
+}
+
+button {
+  width: 49%;
 }
