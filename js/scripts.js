@@ -70,6 +70,7 @@ $(document).ready(function(){
 
 
   $("#player2-roll").click(function(){
+    $("#current-roll").text("");
     roll = die1.roll();
     $("#round-total").text(roundPoints);
     $("#current-roll").append('<img src="img/' + roll.toString() + '.png">');
