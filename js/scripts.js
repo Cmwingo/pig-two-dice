@@ -1,3 +1,5 @@
+var roll = 0;
+var roundPoints = 0;
 //business logic// Manipulate Data, action, not interacting with DOM
 
 function Die() {
@@ -13,32 +15,47 @@ function Player(){
 };
 
 function updateScore(player, points){
-  console.log(points);
-  player.score += points;
-  console.log(player.score);
+  player.score = points;
+  // console.log(player.score);
   return player.score;
 };
 
+// function turn() {
+//   if(roll === 1) {
+//     roundPoints = 0;
+//     return false;
+//   } else {
+//     roundPoints += roll;
+//     return true;
+//   }
+// };
 
-
-
-//user interface// 
+ // setInterval(function() { i++; if (i <= n) { displayCount(countedNumbers[i-1]); } }, 1000); }
+//user interface//
 $(document).ready(function(){
   die1 = new Die();
   player1 = new Player();
   player2 = new Player();
-  points = 0;
+  score = 0;
 
   $("#player1-roll").click(function(){
-    points = die1.roll();
-    console.log(points);
-    $("#player1").text(updateScore(player1, points));
+    roll = die1.roll();
+    if(roll === 1) {
+      roundPoints = 0;
+      console.log("Trying to Disable");
+      $("#player2-roll").prop("disabled", false);
+      $("#player1-roll").prop("disabled", true);
+    } else {
+      roundPoints += roll;
+    }
+    console.log(roll);
+    $("#player1").text(updateScore(player1, roundPoints));
   });
 
   $("#player2-roll").click(function(){
-    points = die1.roll();
-    console.log(points);
-    $("#player2").text(updateScore(player2, points));
+    roll = die1.roll();
+    console.log(roll);
+    $("#player2").text(updateScore(player2, score));
   });
 
 });
