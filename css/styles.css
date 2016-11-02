@@ -62,3 +62,11 @@ body {
 button {
   width: 49%;
 }
+
+#win {
+  font-style: fantasy;
+  text-align: center;
+  color: gold;
+  font-size: 400%;
+  display: none;
+}
