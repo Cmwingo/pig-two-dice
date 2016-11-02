@@ -1,3 +1,5 @@
+//business logic// Manipulate Data, action, not interacting with DOM
+
 function Die() {
   this.pip = 1;
 };
@@ -17,6 +19,10 @@ function updateScore(player, points){
   return player.score;
 };
 
+
+
+
+//user interface// 
 $(document).ready(function(){
   die1 = new Die();
   player1 = new Player();
