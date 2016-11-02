@@ -13,5 +13,11 @@ $(document).ready(function(){
   $("#player1-roll").click(function(){
     die1.roll();
     $("#player1").text(die1.pip);
-  })
+  });
+
+  $("#player2-roll").click(function(){
+    die1.roll();
+    $("#player2").text(die1.pip);
+  });
+
 });
