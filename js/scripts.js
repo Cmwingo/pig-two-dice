@@ -40,9 +40,10 @@ $(document).ready(function(){
   score = 0;
 
   $("#player1-roll").click(function(){
+    $("#current-roll").text("");
     roll = die1.roll();
     $("#round-total").text(roundPoints);
-    $("#current-roll").text(roll);
+    $("#current-roll").append("<img src=img/" + roll.toString() + ".png>");
     if(roll === 1) {
       roundPoints = 0;
       $("#round-total").text(roundPoints);
@@ -71,7 +72,7 @@ $(document).ready(function(){
   $("#player2-roll").click(function(){
     roll = die1.roll();
     $("#round-total").text(roundPoints);
-    $("#current-roll").text(roll);
+    $("#current-roll").append('<img src="img/' + roll.toString() + '.png">');
     if(roll === 1) {
       $("#round-total").text(roundPoints);
       roundPoints = 0;
