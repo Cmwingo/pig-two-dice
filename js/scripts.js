@@ -48,6 +48,7 @@ $(document).ready(function(){
   }
 
   $("#player1-roll").click(function(){
+    $("#player1-stop").prop("disabled", false);
     $("#current-roll").text("");
     roll = die1.roll() + die2.roll();
     console.log(roll);
@@ -61,6 +62,10 @@ $(document).ready(function(){
     } else if(die1.pip === 1 || die2.pip === 1) {
       roundPoints = 0;
       player1EndTurn();
+    } else if(die1.pip === die2.pip){
+      alert("Player 1 Bonus Roll!");
+      $("#player1-stop").prop("disabled", true);
+      roundPoints += roll;
     } else {
       roundPoints += roll;
     }
@@ -82,6 +87,7 @@ $(document).ready(function(){
 
 
   $("#player2-roll").click(function(){
+    $("#player2-stop").prop("disabled", false);
     $("#current-roll").text("");
     roll = die1.roll() + die2.roll();
     $("#round-total").text(roundPoints);
@@ -94,6 +100,10 @@ $(document).ready(function(){
     } else if(die1.pip === 1 || die2.pip === 1) {
       roundPoints = 0;
       player2EndTurn();
+    } else if(die1.pip === die2.pip){
+      alert("Player 2 Bonus Roll!");
+      $("#player2-stop").prop("disabled", true);
+      roundPoints += roll;
     } else {
       roundPoints += roll;
     }
