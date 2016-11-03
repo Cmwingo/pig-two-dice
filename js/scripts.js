@@ -57,7 +57,7 @@ $(document).ready(function(){
     if(player1.score >= 10){
       $("#player2-roll").prop("disabled", true);
       $("#player2-stop").prop("disabled", true);
-      $("#win").append('<h1> Player 1 Wins! </h1>');
+      $("#winner").text('Player 1 Wins!');
       $("#win").toggle();
     }
   });
@@ -93,7 +93,7 @@ $(document).ready(function(){
     if(player2.score >= 10){
       $("#player1-roll").prop("disabled", true);
       $("#player1-stop").prop("disabled", true);
-      $("#win").append('<h1> Player 2 Wins! </h1>');
+      $("#winner").text('Player 2 Wins!');
       $("#win").toggle();
     }
   });
@@ -102,11 +102,14 @@ $(document).ready(function(){
     alert("clicked");
     player1.score = 0;
     player2.score = 0;
-    $("player1").text("0");
-    $("player2").text("0");
+    console.log(player1.score);
+    console.log(player2.score);
+    $("#player1").text("0");
+    $("#player2").text("0");
     $("#player1-roll").prop("disabled", false);      $("#player1-stop").prop("disabled", false);
     roll = 0;
     roundPoints = 0;
-    $("#win").text('');
+    $("#round-total").text(roundPoints);
+    $("#win").hide();
   });
 });
