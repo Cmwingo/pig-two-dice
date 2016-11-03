@@ -1,5 +1,7 @@
 var roll = 0;
-var roundPoints = 0; //initialize//
+var roundPoints = 0;
+var playTo = 100;
+ //initialize//
 //business logic// Manipulate Data, action, not interacting with DOM
 
 function Die() {
@@ -77,7 +79,7 @@ $(document).ready(function(){
     $("#player1").text(updateScore(player1, roundPoints));
       player1EndTurn();
     roundPoints = 0; //reset or value for new player//
-    if(player1.score >= 30){
+    if(player1.score >= playTo){
       $("#player2-roll").prop("disabled", true);
       $("#player2-stop").prop("disabled", true);
       $("#winner").text('Player 1 Wins!');
@@ -115,7 +117,7 @@ $(document).ready(function(){
     $("#player2").text(updateScore(player2, roundPoints));
     player2EndTurn();
     roundpoints = 0;
-    if(player2.score >= 30){
+    if(player2.score >= playTo){
       $("#player1-roll").prop("disabled", true);
       $("#player1-stop").prop("disabled", true);
       $("#winner").text('Player 2 Wins!');

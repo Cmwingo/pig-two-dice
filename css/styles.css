@@ -1,6 +1,6 @@
 .jumbotron h1 {
   font-size: 450%;
-  font-family: fantasy;
+  font-family: 'Permanent Marker', cursive;
   color: gold;
   text-align: center;
   display: inline-block;
@@ -8,20 +8,20 @@
 
 .jumbotron {
   overflow: hidden;
-  background-color: #800000;
+  background-color: rgba(255,255,255,0.4);
 }
 
 h2 {
-  font-size: 200%;
-  font-family: fantasy;
+  font-size: 250%;
+  font-family: 'Permanent Marker', cursive;
   color: gold;
   display: inline;
   line-height: 320%;
 }
 
 h3 {
-  font-size: 200%;
-  font-family: fantasy;
+  font-size: 350%;
+  font-family: 'Permanent Marker', cursive;
   color: gold;
 }
 
@@ -64,7 +64,8 @@ h3 {
   display: inline-block;
 }
 body {
-  background-color: #009900;
+  background-color: #511268;
+  color: lightgray;
 }
 
 button {
@@ -72,7 +73,7 @@ button {
 }
 
 #win {
-  font-style: fantasy;
+  font-family: 'Permanent Marker', cursive;
   text-align: center;
   color: gold;
   font-size: 400%;
