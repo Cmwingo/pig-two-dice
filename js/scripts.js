@@ -39,6 +39,8 @@ $(document).ready(function(){
       $("#player1-roll").prop("disabled", true);
       $("#player2-stop").prop("disabled", false);
       $("#player1-stop").prop("disabled", true);
+      $("#player1-turn").hide();
+      $("#player2-turn").show();
     } else {
       roundPoints += roll;
     }
@@ -51,6 +53,8 @@ $(document).ready(function(){
     $("#player1-roll").prop("disabled", true);
     $("#player2-stop").prop("disabled", false);
     $("#player1-stop").prop("disabled", true);
+    $("#player1-turn").hide();
+    $("#player2-turn").show();
     $("#round-total").text(roundPoints);
     $("#player1").text(updateScore(player1, roundPoints));
     roundPoints = 0; //reset or value for new player//
@@ -75,6 +79,8 @@ $(document).ready(function(){
       $("#player2-roll").prop("disabled", true);
       $("#player1-stop").prop("disabled", false);
       $("#player2-stop").prop("disabled", true);
+      $("#player2-turn").hide();
+      $("#player1-turn").show();
     } else {
       roundPoints += roll;
     }
@@ -87,6 +93,8 @@ $(document).ready(function(){
     $("#player2-roll").prop("disabled", true);
     $("#player1-stop").prop("disabled", false);
     $("#player2-stop").prop("disabled", true);
+    $("#player2-turn").hide();
+    $("#player1-turn").show();
     $("#round-total").text(roundPoints);
     $("#player2").text(updateScore(player2, roundPoints));
     roundpoints = 0;
@@ -99,14 +107,17 @@ $(document).ready(function(){
   });
 
   $("#play-again").click(function(){
-    alert("clicked");
+    alert("THANKS FOR PLAYING!");
     player1.score = 0;
     player2.score = 0;
     console.log(player1.score);
     console.log(player2.score);
     $("#player1").text("0");
     $("#player2").text("0");
-    $("#player1-roll").prop("disabled", false);      $("#player1-stop").prop("disabled", false);
+    $("#player1-roll").prop("disabled", false);
+    $("#player1-stop").prop("disabled", false);
+    $("#player2-turn").hide();
+    $("#player1-turn").show();
     roll = 0;
     roundPoints = 0;
     $("#round-total").text(roundPoints);
