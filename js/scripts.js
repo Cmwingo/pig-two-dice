@@ -50,6 +50,7 @@ $(document).ready(function(){
   }
 
   $("#player1-roll").click(function(){
+    $("#rules").hide();
     $("#player1-stop").prop("disabled", false);
     $("#current-roll").text("");
     roll = die1.roll() + die2.roll();
@@ -141,5 +142,6 @@ $(document).ready(function(){
     roundPoints = 0;
     $("#round-total").text(roundPoints);
     $("#win").hide();
+    $("#rules").show();
   });
 });

@@ -9,6 +9,7 @@
 .jumbotron {
   overflow: hidden;
   background-color: rgba(255,255,255,0.4);
+  text-align: center;
 }
 
 h2 {
@@ -28,6 +29,8 @@ h3 {
 #current-roll img {
   width: 35%;
   margin-top: 3%;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 
 #round-total {
@@ -51,7 +54,7 @@ h3 {
 }
 
 #left {
-  width: 25%;
+  width: 75%;
 }
 
 #right {
@@ -64,8 +67,12 @@ body {
 
 button {
   width: 49%;
+  font-size: 140%;
 }
 
+.btn-lg {
+  font-size: 26px;
+}
 #win {
   font-family: 'Permanent Marker', cursive;
   text-align: center;
@@ -76,6 +83,7 @@ button {
 
 .well {
   background-color: rgba(255,255,255,0.4);
+  height: 55%;
 }
 
 #player2-turn {
@@ -93,15 +101,23 @@ button {
   width: 10%;
 }
 
+#rules {
+  font-family: 'Permanent Marker', cursive;
+  text-align: center;
+  color: gold;
+  font-size: 140%;
+}
+
 #rules ul {
   list-style: none;
 }
 
 #rules h3 {
-  font-size: 300%;
+  font-size: 250%;
 }
 
-@media screen and (min-width: 450px) {
+
+@media screen and (min-width: 550px) {
   .jumbotron h1 {
     font-size: 450%;
     font-family: 'Permanent Marker', cursive;
@@ -132,6 +148,8 @@ button {
   #current-roll img {
     width: 35%;
     margin-top: 3%;
+    margin-left: 2%;
+    margin-right: 2%;
   }
 
   #round-total {
@@ -202,12 +220,14 @@ button {
     display: inline-block;
     width: 10%;
   }
+
   #rules {
     font-family: 'Permanent Marker', cursive;
     text-align: center;
     color: gold;
     font-size: 150%;
   }
+
   #rules ul {
     list-style: none;
   }
