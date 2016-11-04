@@ -93,7 +93,15 @@ button {
   width: 10%;
 }
 
-@media screen and (min-width: 480px) {
+#rules ul {
+  list-style: none;
+}
+
+#rules h3 {
+  font-size: 300%;
+}
+
+@media screen and (min-width: 450px) {
   .jumbotron h1 {
     font-size: 450%;
     font-family: 'Permanent Marker', cursive;
