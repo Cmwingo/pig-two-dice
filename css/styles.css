@@ -173,18 +173,9 @@ button {
   }
 
   #left {
-    width: 25%;
-    margin: 0%;
-    padding: 0%;
-    display: inline-block;
+    width: 60%;
   }
 
-  #right {
-    width: 25%;
-    margin: 0%;
-    padding: 0%;
-    display: inline-block;
-  }
   body {
     background-color: #511268;
     color: lightgray;
@@ -234,5 +225,21 @@ button {
 
   #rules h3 {
     font-size: 300%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #right {
+    width: 25%;
+    margin: 0%;
+    padding: 0%;
+    display: inline-block;
+  }
+
+  #left {
+    width: 25%;
+    margin: 0%;
+    padding: 0%;
+    display: inline-block;
   }
 }
