@@ -1,3 +1,10 @@
+#game {
+  display: none;
+}
+
+#rules {
+  display: none;
+}
 .jumbotron h1 {
   font-size: 450%;
   font-family: 'Permanent Marker', cursive;

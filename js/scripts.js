@@ -1,6 +1,7 @@
 var roll = 0;
 var roundPoints = 0;
 var playTo = 100;
+var opponent = "";
  //initialize//
 //business logic// Manipulate Data, action, not interacting with DOM
 
@@ -12,15 +13,57 @@ Die.prototype.roll = function() {
   return this.pip = Math.floor((Math.random() * 6) + 1);
 };
 
-function Player(){ //constructor of PLAYER OBJECT
+function Player() { //constructor of PLAYER OBJECT
   this.score = 0;
 };
 
-function updateScore(player, points){
+function updateScore(player, points) {
   player.score += points;
   roundPoints = 0;
   return player.score;
 };
+
+function Ai() {
+  this.score = 0;
+};
+
+Ai.prototype.strat = function() {
+  if(die1.pip === die2.pip) {
+    return "play";
+  } else if(player2.score + roundPoints >= playTo) {
+    return "stop";
+  } else if(player2.score - player1.score > 20 && roundPoints > 4) {
+    return "stop";
+  } else if(player2.score - player1.score <= 20 && roundPoints > 9) {
+    return "stop";
+  } else {
+    return "play";
+  }
+};
+// Ai.prototype.play = function() {
+//   while(x != 0){
+//     roll = die1.roll() + die2.roll();
+//     if(roll === 2){
+//       roundPoints = 0;
+//       Ai.score = 0;
+//       $("#player2").text("0");
+//       player2EndTurn();
+//       x = 0;
+//     } else if(die1.pip === 1 || die2.pip === 1) {
+//       roundPoints = 0;
+//       player2EndTurn();
+//       x = 0;
+//     } else if(die1.pip === die2.pip){
+//       alert("Player 2 Bonus Roll!");
+//       $("#player2-stop").prop("disabled", true);
+//       roundPoints += roll;
+//       Ai.play();
+//     } else {
+//       roundPoints += roll;
+//       Ai.play();
+//     }
+//   }
+// };
 
 //user interface//
 $(document).ready(function(){
@@ -28,6 +71,7 @@ $(document).ready(function(){
   die2 = new Die();
   player1 = new Player(); //constructor call
   player2 = new Player();
+  aiOpponent = new Ai();
 
   function player1EndTurn() {
     $("#round-total").text(roundPoints);
@@ -37,17 +81,34 @@ $(document).ready(function(){
     $("#player1-stop").prop("disabled", true);
     $("#player1-turn").hide();
     $("#player2-turn").show();
+    if(opponent === "computer" && player1.score < playTo && player2.score < playTo) {
+       setInterval(function() { while (aiOpponent.strat() != "stop") { $("#player2-roll").click(); } $("player2-stop").click(); }, 2000);
+    }
   };
 
   function player2EndTurn() {
+    $("#round-total").text(roundPoints);
     $("#player1-roll").prop("disabled", false);
     $("#player2-roll").prop("disabled", true);
     $("#player1-stop").prop("disabled", false);
     $("#player2-stop").prop("disabled", true);
     $("#player2-turn").hide();
     $("#player1-turn").show();
-    $("#round-total").text(roundPoints);
   }
+
+  $("#human").click(function(){
+    $("#load-screen").hide();
+    $("#rules").show();
+    $("#game").show();
+    return "human";
+  });
+
+  $("#computer").click(function(){
+    $("#load-screen").hide();
+    $("#rules").show();
+    $("#game").show();
+    return "computer";
+  });
 
   $("#player1-roll").click(function(){
     $("#rules").hide();
@@ -126,7 +187,7 @@ $(document).ready(function(){
     }
   });
 
-  $("#play-again").click(function(){
+  $("#play-agAin").click(function(){
     alert("THANKS FOR PLAYING!");
     player1.score = 0;
     player2.score = 0;
