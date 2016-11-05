@@ -25,22 +25,36 @@ function updateScore(player, points) {
 
 function Ai() {
   this.score = 0;
+  this.playState = "play";
 };
 
 Ai.prototype.strat = function() {
+  alert("Strategy");
   if(die1.pip === die2.pip) {
-    return "play";
+    this.playState = "play";
   } else if(player2.score + roundPoints >= playTo) {
-    return "stop";
+    alert("Stopping");
+    this.playState = "stop";
   } else if(player2.score - player1.score > 20 && roundPoints > 4) {
-    return "stop";
+    alert("Stopping");
+    this.playState = "stop";
   } else if(player2.score - player1.score <= 20 && roundPoints > 9) {
-    return "stop";
+    alert("Stopping");
+    this.playState = "stop";
   } else {
-    return "play";
+    this.playState = "play";
   }
 };
-// Ai.prototype.play = function() {
+
+Ai.prototype.play = function() {
+  alert("Play");
+  $("#player2-roll").click();
+  if(this.playState === "play") {
+    this.strat();
+  }
+
+  // setInterval(function() { while (this.playState != "stop") { $("#player2-roll").click(); } }, 2000);
+
 //   while(x != 0){
 //     roll = die1.roll() + die2.roll();
 //     if(roll === 2){
@@ -63,7 +77,7 @@ Ai.prototype.strat = function() {
 //       Ai.play();
 //     }
 //   }
-// };
+};
 
 //user interface//
 $(document).ready(function(){
@@ -81,12 +95,19 @@ $(document).ready(function(){
     $("#player1-stop").prop("disabled", true);
     $("#player1-turn").hide();
     $("#player2-turn").show();
-    if(opponent === "computer" && player1.score < playTo && player2.score < playTo) {
-       setInterval(function() { while (aiOpponent.strat() != "stop") { $("#player2-roll").click(); } $("player2-stop").click(); }, 2000);
+    console.log(opponent);
+    if(opponent === "computer" && document.getElementById("player2-roll").getAttribute("disabled") === null && player1.score < playTo && player2.score < playTo) {
+      alert("Calling the AI");
+      setInterval(function() { while (document.getElementById("player2-roll").getAttribute("disabled") === null) { aiOpponent.play(); } }, 2000);
+      if(aiOpponent.playState === "stop" && document.getElementById("player2-stop").getAttribute("disabled" === null)) {
+        $("#player2-stop").click();
+      }
     }
   };
 
   function player2EndTurn() {
+    alert("Player2 Stopping")
+    aiOpponent.playState = "stop";
     $("#round-total").text(roundPoints);
     $("#player1-roll").prop("disabled", false);
     $("#player2-roll").prop("disabled", true);
@@ -100,14 +121,14 @@ $(document).ready(function(){
     $("#load-screen").hide();
     $("#rules").show();
     $("#game").show();
-    return "human";
+    opponent = "human";
   });
 
   $("#computer").click(function(){
     $("#load-screen").hide();
     $("#rules").show();
     $("#game").show();
-    return "computer";
+    opponent = "computer";
   });
 
   $("#player1-roll").click(function(){
@@ -139,7 +160,7 @@ $(document).ready(function(){
 
   $("#player1-stop").click(function(){
     $("#player1").text(updateScore(player1, roundPoints));
-      player1EndTurn();
+    player1EndTurn();
     roundPoints = 0; //reset or value for new player//
     if(player1.score >= playTo){
       $("#player2-roll").prop("disabled", true);
@@ -151,6 +172,7 @@ $(document).ready(function(){
 
 
   $("#player2-roll").click(function(){
+    alert("Player 2 Rolling");
     $("#player2-stop").prop("disabled", false);
     $("#current-roll").text("");
     roll = die1.roll() + die2.roll();
