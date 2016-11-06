@@ -51,7 +51,7 @@ Ai.prototype.play = function() {
     $("#player2-roll").click();
     this.strat();
   }
-
+};
   // setInterval(function() { while (this.playState != "stop") { $("#player2-roll").click(); } }, 2000);
 
 //   while(x != 0){
@@ -76,7 +76,7 @@ Ai.prototype.play = function() {
 //       Ai.play();
 //     }
 //   }
-};
+
 
 //user interface//
 $(document).ready(function(){
@@ -85,6 +85,7 @@ $(document).ready(function(){
   player1 = new Player(); //constructor call
   player2 = new Player();
   aiOpponent = new Ai();
+  animationDelay = 0;
 
   function player1EndTurn() {
     $("#round-total").text(roundPoints);
@@ -111,7 +112,7 @@ $(document).ready(function(){
           }
       }
     }
-    }, 3000);
+  }, 2000);
   };
 
   function player2EndTurn() {
@@ -193,6 +194,14 @@ $(document).ready(function(){
     $("#round-total").text(roundPoints);
     console.log("Round Points: " + roundPoints);
     $("#current-roll").append('<img src="img/' + die1.pip.toString() + '.png">' + '<img src="img/' + die2.pip.toString() + '.png">');
+    /*if(opponent === "computer"){
+      setTimeout(function(){
+        console.log("Delay Loop");
+        $("#current-roll").text("");
+        $("#round-total").text(roundPoints);
+        $("#current-roll").append('<img src="img/' + die1.pip.toString() + '.png">' + '<img src="img/' + die2.pip.toString() + '.png">');
+      }, 5000);
+    }*/
     if(roll === 2){
       roundPoints = 0;
       player2.score = 0;
@@ -211,14 +220,18 @@ $(document).ready(function(){
     console.log(roundPoints);
     if(opponent === "human"){
       $("#round-total").text(roundPoints);
-    } else if(opponent === "computer") {
-      setInterval(function(){$("#round-total").text(roundPoints);}, 1000);
     }
   });
 
   $("#player2-stop").click(function(){
-    $("#player2").text(updateScore(player2, roundPoints));
-    roundpoints = 0;
+    if(opponent === "computer"){
+      console.log("Delaying Results");
+      setTimeout(function(){
+        $("#player2").text(updateScore(player2, roundPoints));
+      }, 600);
+    } else {
+      $("#player2").text(updateScore(player2, roundPoints));
+    }
     if(player2.score >= playTo){
       $("#player1-roll").prop("disabled", true);
       $("#player1-stop").prop("disabled", true);
