@@ -241,6 +241,7 @@ $(document).ready(function(){
     roundPoints = 0;
     $("#round-total").text(roundPoints);
     $("#win").hide();
-    $("#rules").show();
+    $("#game").hide();
+    $("#load-screen").show();
   });
 });
