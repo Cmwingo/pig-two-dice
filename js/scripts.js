@@ -107,7 +107,7 @@ $(document).ready(function(){
             if(aiOpponent.playState === "stop" && document.getElementById("player2-stop").getAttribute("disabled") === null) {
                 alert("Taking points");
                 $("#player2-stop").click();
-              } aiOpponent.play(); } }, 5000);
+              } aiOpponent.play(); } }, 3000);
       }
     }
   };
@@ -206,7 +206,11 @@ $(document).ready(function(){
       roundPoints += roll;
     }
     console.log(roundPoints);
-    $("#round-total").text(roundPoints);
+    if(opponent === "human"){
+      $("#round-total").text(roundPoints);
+    } else if(opponent === "computer") {
+      setInterval(function(){$("#round-total").text(roundPoints);}, 1000);
+    }
   });
 
   $("#player2-stop").click(function(){
@@ -221,7 +225,7 @@ $(document).ready(function(){
     player2EndTurn();
   });
 
-  $("#play-agAin").click(function(){
+  $("#play-again").click(function(){
     alert("THANKS FOR PLAYING!");
     player1.score = 0;
     player2.score = 0;
