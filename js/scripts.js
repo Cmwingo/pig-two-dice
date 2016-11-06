@@ -24,7 +24,6 @@ function updateScore(player, points) {
 };
 
 function Ai() {
-  this.score = 0;
   this.playState = "play";
 };
 
@@ -47,9 +46,9 @@ Ai.prototype.strat = function() {
 };
 
 Ai.prototype.play = function() {
-  alert("Play");
-  $("#player2-roll").click();
+  alert(this.playState);
   if(this.playState === "play") {
+    $("#player2-roll").click();
     this.strat();
   }
 
@@ -98,21 +97,30 @@ $(document).ready(function(){
     console.log(opponent);
     if(opponent === "computer" && document.getElementById("player2-roll").getAttribute("disabled") === null && player1.score < playTo && player2.score < playTo) {
       alert("Calling the AI");
-      setInterval(function() { while (document.getElementById("player2-roll").getAttribute("disabled") === null) { aiOpponent.play(); } }, 2000);
-      if(aiOpponent.playState === "stop" && document.getElementById("player2-stop").getAttribute("disabled" === null)) {
+      console.log(aiOpponent.playState);
+      console.log(document.getElementById("player2-stop").getAttribute("disabled"));
+      if(aiOpponent.playState === "stop" && document.getElementById("player2-stop").getAttribute("disabled") === null) {
         $("#player2-stop").click();
+      } else {
+        setInterval(function() {
+          while (document.getElementById("player2-roll").getAttribute("disabled") === null) {
+            if(aiOpponent.playState === "stop" && document.getElementById("player2-stop").getAttribute("disabled") === null) {
+                alert("Taking points");
+                $("#player2-stop").click();
+              } aiOpponent.play(); } }, 5000);
       }
     }
   };
 
   function player2EndTurn() {
-    alert("Player2 Stopping")
+    alert("Player2 Stopping");
     aiOpponent.playState = "stop";
     $("#round-total").text(roundPoints);
     $("#player1-roll").prop("disabled", false);
     $("#player2-roll").prop("disabled", true);
     $("#player1-stop").prop("disabled", false);
     $("#player2-stop").prop("disabled", true);
+    console.log(document.getElementById("player2-roll").getAttribute("disabled") === null);
     $("#player2-turn").hide();
     $("#player1-turn").show();
   }
@@ -132,6 +140,7 @@ $(document).ready(function(){
   });
 
   $("#player1-roll").click(function(){
+    aiOpponent.playState = "play";
     $("#rules").hide();
     $("#player1-stop").prop("disabled", false);
     $("#current-roll").text("");
@@ -160,14 +169,15 @@ $(document).ready(function(){
 
   $("#player1-stop").click(function(){
     $("#player1").text(updateScore(player1, roundPoints));
-    player1EndTurn();
     roundPoints = 0; //reset or value for new player//
-    if(player1.score >= playTo){
+    if(player1.score >= playTo) {
+      aiOpponent.playState = "stop";
       $("#player2-roll").prop("disabled", true);
       $("#player2-stop").prop("disabled", true);
       $("#winner").text('Player 1 Wins!');
       $("#win").toggle();
     }
+    player1EndTurn();
   });
 
 
@@ -176,7 +186,9 @@ $(document).ready(function(){
     $("#player2-stop").prop("disabled", false);
     $("#current-roll").text("");
     roll = die1.roll() + die2.roll();
+    console.log(roll);
     $("#round-total").text(roundPoints);
+    console.log("Round Points: " + roundPoints);
     $("#current-roll").append('<img src="img/' + die1.pip.toString() + '.png">' + '<img src="img/' + die2.pip.toString() + '.png">');
     if(roll === 2){
       roundPoints = 0;
@@ -193,13 +205,12 @@ $(document).ready(function(){
     } else {
       roundPoints += roll;
     }
-    console.log(roll);
+    console.log(roundPoints);
     $("#round-total").text(roundPoints);
   });
 
   $("#player2-stop").click(function(){
     $("#player2").text(updateScore(player2, roundPoints));
-    player2EndTurn();
     roundpoints = 0;
     if(player2.score >= playTo){
       $("#player1-roll").prop("disabled", true);
@@ -207,6 +218,7 @@ $(document).ready(function(){
       $("#winner").text('Player 2 Wins!');
       $("#win").toggle();
     }
+    player2EndTurn();
   });
 
   $("#play-agAin").click(function(){
