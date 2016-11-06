@@ -95,7 +95,7 @@ $(document).ready(function(){
     $("#player1-turn").hide();
     $("#player2-turn").show();
     console.log(opponent);
-    if(opponent === "computer" && document.getElementById("player2-roll").getAttribute("disabled") === null && player1.score < playTo && player2.score < playTo) {
+    setInterval(function(){if(opponent === "computer" && document.getElementById("player2-roll").getAttribute("disabled") === null && player1.score < playTo && player2.score < playTo) {
       alert("Calling the AI");
       console.log(aiOpponent.playState);
       console.log(document.getElementById("player2-stop").getAttribute("disabled"));
@@ -111,6 +111,7 @@ $(document).ready(function(){
           }
       }
     }
+    }, 3000);
   };
 
   function player2EndTurn() {
