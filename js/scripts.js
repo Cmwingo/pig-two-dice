@@ -25,7 +25,6 @@ function updateScore(player, points) {
 
 function Ai() {
   this.playState = "play";
-  this.scores = [];
 };
 
 Ai.prototype.strat = function() {
@@ -46,15 +45,13 @@ Ai.prototype.strat = function() {
   }
 };
 
-Ai.prototype.play = function(i) {
+Ai.prototype.play = function() {
   alert(this.playState);
   if(this.playState === "play") {
     $("#player2-roll").click();
-    this.scores[i] = [die1.pip, die2.pip, roll];
-    console.log("Round " + i + ": " + this.scores[i]);
     this.strat();
   }
-};
+
   // setInterval(function() { while (this.playState != "stop") { $("#player2-roll").click(); } }, 2000);
 
 //   while(x != 0){
@@ -79,7 +76,7 @@ Ai.prototype.play = function(i) {
 //       Ai.play();
 //     }
 //   }
-
+};
 
 //user interface//
 $(document).ready(function(){
@@ -90,45 +87,29 @@ $(document).ready(function(){
   aiOpponent = new Ai();
 
   function player1EndTurn() {
-    var i = 0;
-    $("#round-total").text(roundPoints);           //Sets the display for the round points back to zero
-    $("#player2-roll").prop("disabled", false);    //And toggles the player controls and turn icon
+    $("#round-total").text(roundPoints);
+    $("#player2-roll").prop("disabled", false);
     $("#player1-roll").prop("disabled", true);
     $("#player2-stop").prop("disabled", false);
     $("#player1-stop").prop("disabled", true);
     $("#player1-turn").hide();
     $("#player2-turn").show();
     console.log(opponent);
-    if(opponent === "computer" && document.getElementById("player2-roll").getAttribute("disabled") === null && player1.score < playTo && player2.score < playTo) { //Checks for an AI Player
+    if(opponent === "computer" && document.getElementById("player2-roll").getAttribute("disabled") === null && player1.score < playTo && player2.score < playTo) {
       alert("Calling the AI");
       console.log(aiOpponent.playState);
       console.log(document.getElementById("player2-stop").getAttribute("disabled"));
       if(aiOpponent.playState === "stop" && document.getElementById("player2-stop").getAttribute("disabled") === null) {
-        i--;
         $("#player2-stop").click();
       } else {
           while (document.getElementById("player2-roll").getAttribute("disabled") === null) {
             if(aiOpponent.playState === "stop" && document.getElementById("player2-stop").getAttribute("disabled") === null) {
                 alert("Taking points");
                 $("#player2-stop").click();
-              } aiOpponent.play(i++);}
+              }
+            aiOpponent.play()
+          }
       }
-      $("#player1-roll").prop("disabled", true);
-      $("#player1-stop").prop("disabled", true);
-      setInterval(function() {
-        i -= 2;
-        for(n = 0; n <= i; n ++) {
-          console.log("n=" + n);
-          console.log("i=" + i);
-          var displayRound = aiOpponent.scores.pop();
-          console.log(displayRound);
-          $("#current-roll").text("");
-          $("#round-total").text(displayRound[2]);
-          $("#current-roll").append('<img src="img/' + displayRound[0].toString() + '.png">' + '<img src="img/' + displayRound[1].toString() + '.png">');
-        } }, 1500);
-        $("#player2").text(updateScore(player2, roundPoints));
-        $("#player1-roll").prop("disabled", false);
-        $("#player1-stop").prop("disabled", false);
     }
   };
 
@@ -196,6 +177,7 @@ $(document).ready(function(){
       $("#player2-stop").prop("disabled", true);
       $("#winner").text('Player 1 Wins!');
       $("#win").toggle();
+      $("#game").toggle();
     }
     player1EndTurn();
   });
@@ -234,15 +216,14 @@ $(document).ready(function(){
   });
 
   $("#player2-stop").click(function(){
-    if(opponent === "human") {
-      $("#player2").text(updateScore(player2, roundPoints));
-      roundpoints = 0;
-    }
+    $("#player2").text(updateScore(player2, roundPoints));
+    roundpoints = 0;
     if(player2.score >= playTo){
       $("#player1-roll").prop("disabled", true);
       $("#player1-stop").prop("disabled", true);
       $("#winner").text('Player 2 Wins!');
       $("#win").toggle();
+      $("#game").toggle();
     }
     player2EndTurn();
   });
@@ -263,7 +244,7 @@ $(document).ready(function(){
     roundPoints = 0;
     $("#round-total").text(roundPoints);
     $("#win").hide();
-    $("#game").hide();
-    $("#load-screen").show();
+    $("#rules").show();
+    $("#game").show();
   });
 });
