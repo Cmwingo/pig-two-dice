@@ -228,7 +228,14 @@ $(document).ready(function(){
       console.log("Delaying Results");
       setTimeout(function(){
         $("#player2").text(updateScore(player2, roundPoints));
-      }, 600);
+        if(player2.score >= playTo){
+          $("#player1-roll").prop("disabled", true);
+          $("#player1-stop").prop("disabled", true);
+          $("#winner").text('Player 2 Wins!');
+          $("#win").toggle();
+          $("#game").toggle();
+        }
+      }, 500);
     } else {
       $("#player2").text(updateScore(player2, roundPoints));
     }
