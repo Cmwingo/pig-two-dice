@@ -126,6 +126,7 @@ $(document).ready(function(){
           $("#round-total").text(displayRound[2]);
           $("#current-roll").append('<img src="img/' + displayRound[0].toString() + '.png">' + '<img src="img/' + displayRound[1].toString() + '.png">');
         } }, 1500);
+        $("#player2").text(updateScore(player2, roundPoints));
         $("#player1-roll").prop("disabled", false);
         $("#player1-stop").prop("disabled", false);
     }
@@ -233,8 +234,10 @@ $(document).ready(function(){
   });
 
   $("#player2-stop").click(function(){
-    $("#player2").text(updateScore(player2, roundPoints));
-    roundpoints = 0;
+    if(opponent === "human") {
+      $("#player2").text(updateScore(player2, roundPoints));
+      roundpoints = 0;
+    }
     if(player2.score >= playTo){
       $("#player1-roll").prop("disabled", true);
       $("#player1-stop").prop("disabled", true);
