@@ -1,6 +1,7 @@
 var roll = 0;
 var roundPoints = 0;
 var playTo = 100;
+var opponent = "";
  //initialize//
 //business logic// Manipulate Data, action, not interacting with DOM
 
@@ -22,12 +23,60 @@ function updateScore(player, points){
   return player.score;
 };
 
+function Ai() {
+  this.playState = "play";
+};
+
+Ai.prototype.strat = function() {
+  alert("Strategy");
+  if(die1.pip === die2.pip) {
+    this.playState = "play";
+  } else if(player2.score + roundPoints >= playTo) {
+    alert("Stopping");
+    this.playState = "stop";
+  } else if(player2.score - player1.score > 20 && roundPoints > 4) {
+    alert("Stopping");
+    this.playState = "stop";
+  } else if(player2.score - player1.score <= 20 && roundPoints > 9) {
+    alert("Stopping");
+    this.playState = "stop";
+  } else {
+    this.playState = "play";
+  }
+};
+
+Ai.prototype.strat = function {
+  setInterval(function() {
+    if(this.playState === "play") {
+      $("#player2-roll").click();
+      this.strat();
+    } else if(this.playState === "stop" && document.getElementById("player2-stop").getAttribute("disabled") === null) {
+      $("player2-stop").click();
+    }
+    player2EndTurn();
+  }, 1000);
+};
 //user interface//
 $(document).ready(function(){
   die1 = new Die();
   die2 = new Die();
   player1 = new Player(); //constructor call
   player2 = new Player();
+  ai = new Ai();
+
+  $("#human").click(function(){
+    $("#load-screen").hide();
+    $("#rules").show();
+    $("#game").show();
+    opponent = "human";
+  });
+
+  $("#computer").click(function(){
+    $("#load-screen").hide();
+    $("#rules").show();
+    $("#game").show();
+    opponent = "computer";
+  });
 
   function player1EndTurn() {
     $("#round-total").text(roundPoints);
@@ -37,6 +86,9 @@ $(document).ready(function(){
     $("#player1-stop").prop("disabled", true);
     $("#player1-turn").hide();
     $("#player2-turn").show();
+    if(opponent === "computer") {
+      ai.play();
+    }
   };
 
   function player2EndTurn() {
@@ -127,21 +179,22 @@ $(document).ready(function(){
   });
 
   $("#play-again").click(function(){
-    alert("THANKS FOR PLAYING!");
-    player1.score = 0;
-    player2.score = 0;
-    console.log(player1.score);
-    console.log(player2.score);
-    $("#player1").text("0");
-    $("#player2").text("0");
-    $("#player1-roll").prop("disabled", false);
-    $("#player1-stop").prop("disabled", false);
-    $("#player2-turn").hide();
-    $("#player1-turn").show();
-    roll = 0;
-    roundPoints = 0;
-    $("#round-total").text(roundPoints);
-    $("#win").hide();
-    $("#rules").show();
+      alert("THANKS FOR PLAYING!");
+      player1.score = 0;
+      player2.score = 0;
+      console.log(player1.score);
+      console.log(player2.score);
+      $("#player1").text("0");
+      $("#player2").text("0");
+      $("#player1-roll").prop("disabled", false);
+      $("#player1-stop").prop("disabled", false);
+      $("#player2-turn").hide();
+      $("#player1-turn").show();
+      roll = 0;
+      roundPoints = 0;
+      $("#round-total").text(roundPoints);
+      $("#win").hide();
+      $("#rules").show();
+      $("#game").show();
+    });
   });
-});
